@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+<meta charset="utf-8">
+<title>Apache Velocity Example</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"  />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="index.html"><img src="http://velocity.apache.org/images/velocity_project_wide.png" alt="Apache Velocity"></a>
+        </div>
+        #set($test = $customDirectiveEx)
+		<h2>#truncate(" $test", 15, "...", true)</h2>
+        
+        <button id="show">Menu <span>+</span> <span style="display:none;">-</span></button>
+        <div class="clear"></div>
+    </div>
+    <div class="nav">
+        <ul>
+         #if($menuItems)
+     		#foreach( $item in $menuItems )
+     			<li><a href="#">$item</a></li>
+     		
+        	#end
+        #end
+        </ul>
+    </div>
+    <div class="content">
+    
+     #if($items)
+     	#foreach( $item in $items )
+     	  <div class="blog">
+   	   				#if(!$StringUtils.isBlank($item.title))
+						    <h2>$item.title</h2>
+					#end
+					#if(!$StringUtils.isBlank($item.image))
+						   <div class="blog-img"><img src="$item.image" alt="demo-image"></div>
+					#end
+					#if(!$StringUtils.isBlank($item.content))
+						  <div class="blog-content"><p> $item.content </p>
+            </div>
+					#end
+   	   
+   	   	#end
+   	#end
+    </div>
+
+   
+<script type="text/javascript">
+	$('.nav').hide();
+	$('#show').click(function (){
+		$(".nav").toggle();
+		$("span").toggle();
+	});
+</script>
+
+</body>
+</html>
